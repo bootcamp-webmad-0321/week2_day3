@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+
+        // Built-in 'arguments' object
+        function showMovieDetails() {
+            console.log('Los argumentos son:', arguments)
+            console.log('...pero arguments es un array-like object D:', arguments.__proto__)
+
+            const realArray = [...arguments]
+            realArray.forEach(elm => console.log(elm))
+        }
+
+        showMovieDetails('Titanic', 'Cameron', 'Kate', 'Leo')
+
+
+
+
+
+
+
+
+        // Rest parameters
+        function showMovieDetails(title, director, ...actors) {
+            console.log('La pelicula se llama', title)
+            console.log('El director/a es', director)
+            console.log('El elenco es:')
+
+            actors.forEach(elm => console.log('- ', elm))
+        }
+
+        showMovieDetails('Titanic', 'Cameron', 'Kate', 'Leo')
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

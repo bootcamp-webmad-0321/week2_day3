@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button id="whatever">HAzme click</button>
+
+    <script>
+
+
+
+
+        // Global context (window)
+        console.log(this)
+        console.log('¿Es el contexto global this la propia window?', this === window)
+
+
+
+        // Function context (window) - as every function statement works as a window method
+        function sayHi() {
+            console.log('----', this)
+        }
+
+        sayHi()
+
+
+
+        // Method context
+        const person = {
+            nick: 'Teo',
+            weight: 60000,
+            walk1() {                   // hace referencia al objeto
+                this.weight -= 100
+                console.log(`${this.nick} ahora pesa ${this.weight / 1000} kgs`)
+            },
+            walk2() {                   // ERROR: el contexto de una función es window
+                setInterval(function () {
+                    this.weight -= 100
+                    console.log(`${this.nick} ahora pesa ${this.weight / 1000} kgs`)
+                }, 1000)
+            },
+            walk3() {                   // ERROR: guarrada
+                let that = this
+                setInterval(function () {
+                    that.weight -= 100
+                    console.log(`${that.nick} ahora pesa ${that.weight / 1000} kgs`)
+                }, 1000)
+            },
+            walk4() {                   // OK! .bind() es un método de las funciones que reorienta su contexto
+                setInterval(function () {
+                    this.weight -= 100
+                    console.log(`${this.nick} ahora pesa ${this.weight / 1000} kgs`)
+                }.bind(this), 1000)
+            },
+            walk5() {                   // OK! Las arrow function no reorientan el contexto
+                setInterval(() => {
+                    this.weight -= 100
+                    console.log(`${this.nick} ahora pesa ${this.weight / 1000} kgs`)
+                }, 1000)
+            }
+        }
+
+        // person.walk1()
+        // person.walk2()
+        // person.walk3()
+        // person.walk4()
+        person.walk5()
+
+
+
+
+
+    </script>
+</body>
+
+</html>

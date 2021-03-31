@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+
+        // // Standard declaration
+        // const drinks = ['Agua', 'Cacaolat', 'Jagger']
+        // const age = 34
+        // const hasPermission = false
+        // const doubleValue = function (val) {
+        //     return val * val
+        // }
+
+
+        // // Instance declaration
+        // const drinks = new Array('Agua', 'Cacaolat', 'Jagger')
+        // const age = new Number(34)
+        // const hasPermission = new Boolean(false)
+        // const doubleValue = new Function('val', 'return val * val')
+
+
+
+
+
+
+        // JS prototype digital trip yay! GO!
+
+        const drinks = ['Agua', 'Cacaolat', 'Jagger']
+
+        console.log('Esto es una instancia de Array:', drinks)
+        console.log('Esto es su prototipo:', drinks.__proto__)
+
+
+
+        // Extensión (instancia, solo afecta a drinks)
+        drinks.sayHowMayItemsYouHave = function () {
+            console.log('Tengo', this.length, 'elementos dentro')
+        }
+
+        // Extensión (prototipo, afecta a todas las instancias del objeto global Array)
+        drinks.__proto__.sayTheLastOneYouHave = function () {
+            console.log('El ultiumo item es:', this[this.length - 1])
+        }
+
+        drinks.sayHowMayItemsYouHave()
+        drinks.sayTheLastOneYouHave()
+
+
+        // Un nuevo array
+        const ages = [11, 22, 33]
+
+
+        // ages.sayHowMayItemsYouHave()         // <= Sin acceso al método de drinks
+        ages.sayTheLastOneYouHave()             // <= Con acceso a todos los métodos del prototype de Array
+
+
+        // OPS! Liada liada chavales
+        ages.__proto__.push = function (elm) {
+            console.log('------')
+            console.log('Parece que quieres meter esto al final eh? hehehehe', elm)
+            console.log('Pues no solo no lo voy a meter sino que voy a sacar', this[this.length - 1])
+            this.pop()
+            console.log('------')
+        }
+
+
+        // IYF (in your face)
+        console.log('Las bebiodas antes del push:', drinks)
+        drinks.push('Chocobailyes')
+        console.log('Las bebiodas después del push:', drinks)
+
+    </script>
+
+</body>
+
+</html>
